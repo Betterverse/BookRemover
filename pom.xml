@@ -5,6 +5,8 @@
 	<artifactId>BookRemover</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<build>
+        <defaultGoal> clean package install</defaultGoal>
+        <finalName>${project.artifactId}</finalName>
 		<plugins>
 			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>
