@@ -2,3 +2,7 @@ name: Book Remover
 author: evilmidget38
 main: net.betterverse.bookremover.BookRemover
 version: 1.0
+commands:
+  bookremover:
+    permission: bookremover.mod
+    usage: /<command> <name of the book, not case sensitive>

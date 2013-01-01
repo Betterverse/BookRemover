@@ -6,6 +6,7 @@ Dedicated to Passiontiger74.
 Permissions
 -----------
 * bookremover.mod - Recieve notifications when an illegal book is found.
+* bookremover.exempt - Illegal books will not be removed from their inventory.
 
 Configuration
 -----------

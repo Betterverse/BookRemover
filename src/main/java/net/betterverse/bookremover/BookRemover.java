@@ -5,6 +5,8 @@ import java.util.List;
 
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
+import org.bukkit.command.Command;
+import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -49,8 +51,6 @@ public class BookRemover extends JavaPlugin implements Listener {
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent e) {
         scanInventory(e.getPlayer(), e.getPlayer().getInventory());
-        scanInventory(e.getPlayer(), e.getPlayer().getInventory());
-
     }
     
     public void modMessage(Player player, String book) {
@@ -63,6 +63,9 @@ public class BookRemover extends JavaPlugin implements Listener {
     
     
     public void scanInventory(Player p, Inventory inventory) {
+        if (p.hasPermission("bookremover.exempt")) {
+            return;
+        }
         List<Integer> illegal = new ArrayList<Integer>();
         for (int i = 0; i < inventory.getSize(); i++) {
             ItemStack current = inventory.getItem(i);
@@ -82,6 +85,25 @@ public class BookRemover extends JavaPlugin implements Listener {
         for (int i : illegal) {
             inventory.setItem(i, null);
         }
+    }
+    
+    @Override
+    public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String[] args) {
+        String book = null;
+        for (String s : args) {
+            book += s + " ";
+        }
+        if (book == null) {
+            sender.sendMessage(ChatColor.GREEN+"Thanks for using BookRemover.  To ban a book, type /bookremover <The name of the book, case insensitive>");
+            return true;
+        }
+        // else
+        illegalNames.add(book);
+        for (Player p : getServer().getOnlinePlayers()) {
+            scanInventory(p, p.getInventory());
+        }
+        sender.sendMessage(ChatColor.GREEN+"The book \'"+book+"\' has been banned.");
+        return true;
     }
 
 }
