@@ -1,0 +1,4 @@
+name: Book Remover
+author: evilmidget38
+main: net.betterverse.bookremover.BookRemover
+version: 1.0
