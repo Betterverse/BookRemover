@@ -37,15 +37,18 @@ public class BookRemover extends JavaPlugin implements Listener {
     @EventHandler
     public void onInventoryOpen(InventoryOpenEvent e) {
         scanInventory((Player)e.getPlayer(), e.getInventory());
+        scanInventory((Player)e.getPlayer(), e.getPlayer().getInventory());
     }
     
     @EventHandler
     public void onInventoryClose(InventoryCloseEvent e) {
         scanInventory((Player)e.getPlayer(), e.getInventory());
+        scanInventory((Player)e.getPlayer(), e.getPlayer().getInventory());
     }
     
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent e) {
+        scanInventory(e.getPlayer(), e.getPlayer().getInventory());
         scanInventory(e.getPlayer(), e.getPlayer().getInventory());
 
     }
