@@ -24,7 +24,8 @@ public class BookRemover extends JavaPlugin implements Listener {
     public void onEnable() {
         getServer().getPluginManager().registerEvents(this, this);
         illegalNames = getConfig().getStringList("bannedBooks");
-        if (illegalNames.isEmpty()) {
+        if (illegalNames == null ) {
+            illegalNames = new ArrayList<String>();
             illegalNames.add("Chasing Passion");
         }
         getConfig().set("bannedBooks", illegalNames);
